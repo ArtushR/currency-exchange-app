@@ -1,0 +1,38 @@
+<div class="container">
+  <h2 style="color: darkblue">Конвертер валют</h2>
+
+  <div class="currency-group">
+    <mat-form-field appearance="fill">
+      <mat-label>Выберите валюту</mat-label>
+      <mat-select [(ngModel)]="fromCurrency" (ngModelChange)="updateResult()">
+        <mat-option *ngFor="let currency of currencyOptions" [value]="currency">{{ currency }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button color="primary" (click)="switchCurrencies()">
+      <mat-icon>swap_horiz</mat-icon>
+    </button>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Выберите валюту</mat-label>
+      <mat-select [(ngModel)]="toCurrency" (ngModelChange)="updateResult()">
+        <mat-option *ngFor="let currency of currencyOptions" [value]="currency">{{ currency }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="input-group">
+
+    <mat-form-field appearance="fill">
+      <mat-label style="color: darkblue; font-size: 20px">{{ currencySymbols[fromCurrency] }}</mat-label>
+      <input matInput type="number" placeholder="0" [(ngModel)]="amount" (ngModelChange)="updateResult()" min="0" >
+      <mat-error *ngIf="amount! < 0">Введите положительное число</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label style="color: darkblue; font-size: 20px">{{ currencySymbols[toCurrency] }}</mat-label>
+      <input matInput type="number" placeholder="0" [(ngModel)]="result" (ngModelChange)="updateAmount()" min="0" >
+      <mat-error *ngIf="result! < 0">Введите положительное число</mat-error>
+    </mat-form-field>
+  </div>
+</div>
